@@ -1,0 +1,89 @@
+@extends('../../../home.index')
+@section('style')
+<link rel="stylesheet" href="/datepicker/js-persian-cal.css">
+
+@endsection
+@section('content')
+<div class="portlet box green">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-gift"></i>  ثبت فورم ف س ۱۰
+							</div>
+							<div class="tools">
+								<a href="" class="collapse" data-original-title="" title="">
+								</a>
+								
+								<a href="" class="reload" data-original-title="" title="">
+								</a>
+								<a href="" class="remove" data-original-title="" title="">
+								</a>
+							</div>
+						</div>
+						<div class="portlet-body portlet-responsive ">
+						@if($fs10->fs10_no)
+								<form role="form" action="/fs10/update/{{$fs10->fs10_no}}" method="post" enctype="multipart/form-data" >
+						@else
+						<form role="form" action="/fs10/save" method="post" enctype="multipart/form-data" >
+						@endif
+
+                        @csrf
+								<div class="form-body ">
+									<div class="row">
+                                       
+                                        <div class="col-md-6 form-group">
+                                        <label>تاریخ ف س۱۰</label>
+											<input  name="fs10_date"  id="pcal1" class="pdate" value="{{ (old('fs10_date') != '') ? old('fs10_date') : $fs10->fs10_date }}" class="form-control">
+											
+										</div>
+										<div class="col-md-6 form-group">
+                                        <label>شماره ف س۱۰</label>
+											<input type="number" name="fs10_no"  id="fs10_no" value="{{ (old('fs10_no') != '') ? old('fs10_no') : $fs10->fs10_no }}" class="form-control">
+											
+										</div>
+					<div class="form-group col-md-6" >
+                        <label class=" control-label ">اسکن فورم ف س۱۰<span class="font-red">*</span></label>
+                            <div class="">
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <div class="input-group input-md ">
+                                    <div class="form-control  uneditable-input" id="custom" data-trigger="fileinput" style="">
+                                        <i class="fa fa-file fileinput-exists"></i>&nbsp; <span class="fileinput-filename">{{$fs10->fs10_scan}}
+                                        </span>
+                                    </div>
+                                    <span class="input-group-addon btn default btn-file">
+                                    <span class="fileinput-new">
+                                     انتخاب فایل </span>
+                                    <span class="fileinput-exists">
+                                    تغییر </span>
+                                    <input type="file" name="fs10_scan">
+                                    </span>
+                                    <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">
+                                    حذف </a>
+                                </div>
+                                <p class="text-muted">{{ $errors->first('file') }}</p>
+
+                            </div>
+                        </div>
+                    </div>
+										<div class="form-actions">
+									<div class="col-md-12">
+									<button type="submit"   class="btn  blue green">ذخیره </button>
+									<a href="/fs10" class="btn-circle btn btn-danger red">لغو</a>
+
+									</div>
+								</div>
+								</div>
+							</form>
+                          
+						</div>
+					</div>
+                
+                
+@endsection
+@section('script')
+
+<script type="text/javascript" src="/datepicker/js-persian-cal.min.js"></script> 
+// datePicker
+<script>
+	var objCal1 = new AMIB.persianCalendar('pcal1');
+</script>
+@endsection
